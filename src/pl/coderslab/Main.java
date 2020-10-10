@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -45,14 +48,19 @@ public class Main {
     }
 
     public static void add() {
-       /* Path path = Paths.get("src/pl/coderslab/tasks.csv");
         Scanner scan = new Scanner(System.in);
-       /* File file = new File(path);
-        Scanner scan2 = new Scanner(file);
-        String answer1 = "";
-        String answer2 = "";
-        String answer3 = "";
-       // while()
+        List<String> list = new ArrayList<>();
+        Path path = Paths.get("src/pl/coderslab/tasks.csv");
+        String answer1;
+        String answer2;
+        String answer3;
+        try {
+            for (String line : Files.readAllLines(path)) {
+                list.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         System.out.println("Please add task description");
         answer1 = scan.nextLine();
@@ -60,16 +68,15 @@ public class Main {
         answer2 = scan.nextLine();
         System.out.println("Is your task important: true/false");
         answer3 = scan.nextLine();
+        list.add(answer1 + "," + answer2 + "," + answer3);
 
-        try (FileWriter fileWriter = new FileWriter("src/pl/coderslab/tasks.csv", false)) {
-            fileWriter.append(answer1);
-            fileWriter.append(answer2);
-            fileWriter.append(answer3);
-            fileWriter.append("\n");
+        try {
+            Files.write(path, list);
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
     }
+
 
     public static void remove() {
         System.out.println("remove");
@@ -77,11 +84,11 @@ public class Main {
 
     public static void list() {
         Path path = Paths.get("src/pl/coderslab/tasks.csv");
-        int i =0;
+        int i = 0;
         try {
             for (String list : Files.readAllLines(path)) {
-                list=list.replace(",","  ");
-                System.out.println(i+" : "+list);
+                list = list.replace(",", "  ");
+                System.out.println(i + " : " + list);
                 i++;
             }
         } catch (IOException e) {
