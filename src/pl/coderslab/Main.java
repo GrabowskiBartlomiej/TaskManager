@@ -51,9 +51,9 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         List<String> list = new ArrayList<>();
         Path path = Paths.get("src/pl/coderslab/tasks.csv");
-        String answer1;
-        String answer2;
-        String answer3;
+        String answer1="";
+        String answer2="";
+        String answer3 = "";
         try {
             for (String line : Files.readAllLines(path)) {
                 list.add(line);
@@ -66,8 +66,12 @@ public class Main {
         answer1 = scan.nextLine();
         System.out.println("Please add task due date");
         answer2 = scan.nextLine();
-        System.out.println("Is your task important: true/false");
-        answer3 = scan.nextLine();
+        while(!answer3.contains("true") && !answer3.contains("false")){
+            System.out.println("Is your task important: true/false");
+            answer3 = scan.nextLine();
+        }
+
+
         list.add(answer1 + "," + answer2 + "," + answer3);
 
         try {
@@ -79,7 +83,40 @@ public class Main {
 
 
     public static void remove() {
-        System.out.println("remove");
+        Path path = Paths.get("src/pl/coderslab/tasks.csv");
+        List<String> list = new ArrayList<>();
+        Scanner scan = new Scanner(System.in);
+        int idToRemove = -1;
+        int length = 0;
+        try {
+            for (String lines : Files.readAllLines(path)) {
+                length++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        while (idToRemove < 0 || idToRemove >= length) {
+            try {
+                System.out.println("Please select value to remove");
+                idToRemove = scan.nextInt();
+            } catch (ArithmeticException e) {
+                System.err.println("This value is not on the list");
+            }
+        }
+        try {
+            for (String line : Files.readAllLines(path)) {
+                list.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        list.remove(idToRemove);
+        try {
+            Files.write(path, list);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Value was succesfully deleted.");
     }
 
     public static void list() {
