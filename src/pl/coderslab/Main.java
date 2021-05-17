@@ -1,14 +1,10 @@
 package pl.coderslab;
 
-import java.awt.*;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -51,8 +47,8 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         List<String> list = new ArrayList<>();
         Path path = Paths.get("src/pl/coderslab/tasks.csv");
-        String answer1="";
-        String answer2="";
+        String answer1 = "";
+        String answer2 = "";
         String answer3 = "";
         try {
             for (String line : Files.readAllLines(path)) {
@@ -66,7 +62,7 @@ public class Main {
         answer1 = scan.nextLine();
         System.out.println("Please add task due date");
         answer2 = scan.nextLine();
-        while(!answer3.contains("true") && !answer3.contains("false")){
+        while (!answer3.contains("true") && !answer3.contains("false")) {
             System.out.println("Is your task important: true/false");
             answer3 = scan.nextLine();
         }
